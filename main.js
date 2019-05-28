@@ -1,39 +1,38 @@
 'use strict';
 
-class PersonalInfo {
-  constructor(person, birthday, moneyAmount) {
-    this.name = person;
-    this.birthday = new Date(...birthday.split('.').reduceRight(
-      (birthdayIntArray, element) =>
-        birthdayIntArray.concat(parseInt(element))
-      , [])
-    );
-    this.deposite = moneyAmount;
-    this.history = [];
-  }
-
-  getInfo() {
-    const ageMs = Date.now() - this.birthday.getTime();
-    const ageDate = new Date(ageMs);
-    ageDate.setHours(24, 0, 0, 0);
-    const age = Math.abs(ageDate.getUTCFullYear() - 1970);
-    console.log(`Name: ${this.name}, Age: ${age}, Amount: ${this
-      .deposite}$`);
-  }
-
-  addMoney(putMoney, transactionInfo) {
-    this.deposite += putMoney;
-    this.history.push(`${transactionInfo}: ${putMoney.toString()}`);
-  }
-
-  withdrawMoney(getMoney, transactionInfo) {
-    this.deposite -= getMoney;
-    this.history.push(`${transactionInfo}: -${getMoney.toString()}`);
-  }
-  getAccountHistory() {
-    console.log(this.history);
-  }
+function PersonalInfo(person, birthday, moneyAmount) {
+  this.name = person;
+  this.birthday = new Date(...birthday.split('.').reduceRight(
+    (birthdayIntArray, element) =>
+      birthdayIntArray.concat(parseInt(element))
+    , [])
+  );
+  this.deposite = moneyAmount;
+  this.history = [];
 }
+
+PersonalInfo.prototype.getInfo = function() {
+  const ageMs = Date.now() - this.birthday.getTime();
+  const ageDate = new Date(ageMs);
+  ageDate.setHours(24, 0, 0, 0);
+  const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+  console.log(`Name: ${this.name}, Age: ${age}, Amount: ${this
+    .deposite$}`);
+};
+
+PersonalInfo.prototype.addMoney = function(putMoney, transactionInfo) {
+  this.deposite += putMoney;
+  this.history.push(`${transactionInfo}: ${putMoney.toString()}`);
+};
+
+PersonalInfo.prototype.withdrawMoney = function(getMoney, transactionInfo) {
+  this.deposite -= getMoney;
+  this.history.push(`${transactionInfo}: -${getMoney.toString()}`);
+};
+
+PersonalInfo.prototype.getAccountHistory = function() {
+  console.log(this.history);
+};
 
 const dmytro = new PersonalInfo('Dmytro', '26.11.1994', 1000);
 const pavel = new PersonalInfo('Pavel', '06.06.1990', 400);
