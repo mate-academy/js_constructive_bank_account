@@ -26,7 +26,7 @@ Person.prototype = {
 
   getDate: function (date) {
     const arr = date.split('.')
-    return years = new Date(new Date() - new Date(`${arr[2]}/${arr[1]}/${arr[0]}`)).getFullYear() - 1970;
+    return new Date(new Date() - new Date(`${arr[2]}/${arr[1]}/${arr[0]}`)).getFullYear() - 1970;
   },
 }
 
