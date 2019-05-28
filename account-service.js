@@ -1,42 +1,41 @@
-class Person {
-    constructor (name, dateOfBirth, money) {
+function Person (name, dateOfBirth, money) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.money = money;
         // this.history = new Set([{ Initial: money }]);
         this.history = [`Initial: ${money}`];
     }
-
-    _getClientAge () {
+Person.prototype = {
+    _getClientAge: function() {
         const arrayBDay = this.dateOfBirth.split('.').reverse();
         const bDay = new Date(...arrayBDay);
         const ageDifMs = Date.now() - bDay.getTime();
         const ageDate = new Date(ageDifMs); // miliseconds from epoch
         return Math.abs(ageDate.getUTCFullYear() - 1970);
-    }
+    },
 
-    _logHistory (cash, info) {
+    _logHistory: function(cash, info) {
         this.history.push(`${info}: ${cash}`);
-    }
+    },
 
-    getInfo () {
+    getInfo: function() {
         console.log(`Name: ${this.name}, Age: ${this._getClientAge()}, Amount: ${this.money}$`)
-    }
+    },
 
-    addMoney (cash, info) {
+    addMoney: function(cash, info) {
         this.money += cash;
         this._logHistory(cash, info);
-    }
+    },
 
-    withdrawMoney (cash, info) {
+    withdrawMoney: function(cash, info) {
         this.money -= cash;
         this._logHistory(`-${cash}`, info);
-    }
+    },
 
-    getAccountHistory () {
+    getAccountHistory: function() {
         console.log(this.history);
     }
-}
+};
 
 const dmytro = new Person('Dmytro', '26.11.1994', 1000);
 const pavel = new Person('Pavel', '06.06.1990', 400);
