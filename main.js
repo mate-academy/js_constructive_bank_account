@@ -34,7 +34,7 @@ Person.prototype.addMoney = function(amount, depositingFunds) {
 
 Person.prototype.withdrawMoney = function(amount, withdrawals) {
   this.currentAmount -= amount;
-  this.operations(amount, withdrawals);
+  this.operations(-amount, withdrawals);
 };
 
 Person.prototype.getAccountHistory = function() {
