@@ -25,8 +25,8 @@ Person.prototype = {
   },
 
   getAge: function (date) {
-    const arr = date.split('.')
-    return new Date(new Date() - new Date(`${arr[2]}/${arr[1]}/${arr[0]}`)).getFullYear() - 1970;
+    const [day, month, year] = date.split('.')
+    return new Date(new Date() - new Date(year, month, day)).getFullYear() - 1970;
   },
 }
 
