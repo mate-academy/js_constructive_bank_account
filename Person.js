@@ -1,13 +1,13 @@
 function Person(name, birth, amount) {
   this.name = name;
   this.amount = amount;
-  this.age = this.getDate(birth)
+  this.dateOfBirth = birth;
   this.history = [`Initial: ${this.amount}`];
 }
 
 Person.prototype = {
   getInfo: function () {
-    console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.amount}$.`);
+    console.log(`Name: ${this.name}, Age: ${this.getAge(this.dateOfBirth)}, Amount: ${this.amount}$.`);
   },
 
   addMoney: function (receipts, comment) {
@@ -24,7 +24,7 @@ Person.prototype = {
     console.log(this.history);
   },
 
-  getDate: function (date) {
+  getAge: function (date) {
     const arr = date.split('.')
     return new Date(new Date() - new Date(`${arr[2]}/${arr[1]}/${arr[0]}`)).getFullYear() - 1970;
   },
