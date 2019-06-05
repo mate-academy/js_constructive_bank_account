@@ -13,19 +13,21 @@ function Person(name, dateOfBirth, amount) {
     }
 
     this.age = function getAge() {
-        let currentYear = new Date().getFullYear();
-        let currentMonth = new Date().getMonth() + 1;
-        let currentDay = new Date().getDate();
+        const newDate = new Date();
+        let currentYear = newDate.getFullYear();
+        let currentMonth = newDate.getMonth() + 1;
+        let currentDay = newDate.getDate();
+        let age = currentYear - year;
         if (currentMonth < month || currentMonth === month && currentDay < day ) {
-            return (currentYear - year - 1);
+            return (age - 1);
         }
-        return currentYear - year;
+        return age;
     }
 
 };
 
 Person.prototype.getInfo = function() {
-    console.log(`${this.name} ${this.age()} ${this.currentAmount}`);
+    return (`${this.name} ${this.age()} ${this.currentAmount}`);
 };
 
 Person.prototype.addMoney = function(value, str) {
@@ -33,7 +35,7 @@ Person.prototype.addMoney = function(value, str) {
     this.operations(value, str);
 }
 Person.prototype.getAccountHistory = function(){
-    console.log(this.accountHistory);
+    return this.accountHistory;
 }
 Person.prototype.withdrawMoney = function(value, str){
     this.currentAmount -= value;
