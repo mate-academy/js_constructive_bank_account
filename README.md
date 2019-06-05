@@ -1,5 +1,7 @@
 # Constructive Bank Account
 
+GH-Pages https://sherjlok15.github.io/js_constructive_bank_account/
+
 Create a **function/constructor** for working with bank account data of a person.
 
 **Requirements:**
