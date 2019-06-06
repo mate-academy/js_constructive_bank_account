@@ -20,7 +20,7 @@ function Person(name, birth, amount) {
 
 Person.prototype = {
   getInfo() {
-    console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.currentAmount}$`)
+    return `Name: ${this.name}, Age: ${this.age}, Amount: ${this.currentAmount}$`
   },
 
   addMoney(money, income) {
