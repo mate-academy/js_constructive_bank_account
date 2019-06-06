@@ -1,45 +1,43 @@
 'use strict';
 
 function Person(name, dateOfBirth, amount) {
-    this.name = name;
-    this.dateOfBirth = dateOfBirth.split('.').reverse();
-    this.amount = amount;
-    this.currentAmount = this.amount;
-    let [year, month, day] = this.dateOfBirth;
-    this.accountHistory = [{'Initial': amount}];
+  this.name = name;
+  this.amount = amount;
+  this.currentAmount = this.amount;
+  const [year, month, day] = this.dateOfBirth.dateOfBirth.split('.').reverse();
+  this.accountHistory = [{'Initial': amount}];
+  this.operations = function (value, str) {
+      this.accountHistory.push({[str] : value})
+  }
 
-    this.operations = function (value, str) {
-        this.accountHistory.push({[str] : value})
+  this.age = function getAge() {
+    const newDate = new Date();
+    const currentYear = newDate.getFullYear();
+    const currentMonth = newDate.getMonth() + 1;
+    const currentDay = newDate.getDate();
+    const age = currentYear - year;
+    if (currentMonth < month || currentMonth === month && currentDay < day ) {
+        return (age - 1);
     }
-
-    this.age = function getAge() {
-        const newDate = new Date();
-        let currentYear = newDate.getFullYear();
-        let currentMonth = newDate.getMonth() + 1;
-        let currentDay = newDate.getDate();
-        let age = currentYear - year;
-        if (currentMonth < month || currentMonth === month && currentDay < day ) {
-            return (age - 1);
-        }
-        return age;
-    }
+    return age;
+  }
 
 };
 
 Person.prototype.getInfo = function() {
-    return (`${this.name} ${this.age()} ${this.currentAmount}`);
+  return (`${this.name} ${this.age()} ${this.currentAmount}`);
 };
 
 Person.prototype.addMoney = function(value, str) {
-    this.currentAmount += value;
-    this.operations(value, str);
+  this.currentAmount += value;
+  this.operations(value, str);
 }
 Person.prototype.getAccountHistory = function(){
-    return this.accountHistory;
+  return this.accountHistory;
 }
 Person.prototype.withdrawMoney = function(value, str){
-    this.currentAmount -= value;
-    this.operations(-value, str);
+  this.currentAmount -= value;
+  this.operations(-value, str);
 }
 
 const dmytro = new Person('Dmytro', '26.11.1994', 1000);
