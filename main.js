@@ -1,3 +1,5 @@
+'use strict';
+
 const prototype = {
   getInfo: function() {
     console.log(`Name: ${this.name}, Age: ${this.calculateAge(this.dateBD)}, Amount: ${this.cashBrush}$`);
@@ -26,8 +28,9 @@ const prototype = {
 
   calculateAge: function(birthday) {
     const bDay = birthday.split('.').reverse().join(', ');
-    const age = new Date().getFullYear() - new Date(bDay).getFullYear() -1;
-    return age;
+    const age = Date.now() - new Date(bDay).getTime();
+    const userAge = new Date(age);
+    return Math.abs(userAge.getUTCFullYear() - 1970);
   }
 }
 
