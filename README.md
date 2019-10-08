@@ -38,3 +38,39 @@ pavel.getInfo(); // // Name: Pavel, Age: <calculate yourself>, Amount: 400$
     - [https://stackoverflow.com/a/24181701/4449154](https://stackoverflow.com/a/24181701/4449154)
     - [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#Examples](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#Examples)
     - [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
+
+
+function Person(name, birthDate, amount) {
+  this.name = name;
+  this.birthDate = birthDate;
+  this.amount = amount;
+  this.age = getAge(this.birthDate);
+}
+
+function getAge(birthDate) {
+  const normalizeDate = birthDate.split('.');
+  let tmp = normalizeDate[0];
+  normalizeDate[0] = normalizeDate[1];
+  normalizeDate[1] = tmp;
+  birthDate = normalizeDate.join('.')
+  let age = Math.abs(new Date(Date.now() - Date.parse(birthDate)).getUTCFullYear() - 1970);
+  return age;
+}
+
+Person.prototype.getInfo = function() {
+  console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.amount}\$`);
+}
+
+Person.prototype.addMoney = function(amount, source) {
+  this.amount += amount;
+}
+
+Person.prototype.withdrawMoney = function(amount, target) {
+  this.amount -= amount;
+}
+
+const dmytro = new Person('Dmytro', '26.11.1994', 1000);
+dmytro.getInfo()
+dmytro.addMoney(2000, 'salary');
+dmytro.withdrawMoney(500, 'new phone');
+dmytro.getInfo()
