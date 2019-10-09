@@ -11,7 +11,7 @@ class Person {
     let thisYear = new Date().getFullYear();
     let birthYear = this.date.slice(-4); 
     return thisYear - birthYear;  
-  }
+  }//
 
   getInfo() {
     console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.amount}$`); 
