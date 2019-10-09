@@ -16,7 +16,7 @@ const prototypes = {
   },
 
   getInfo : function () {
-    console.log(`Client: ${this.name}\nAge: ${this.calculateAge(this.birth)}\nMoney: ${this.money}`)
+    console.log(`Client: ${this.name}\nAge: ${this.calculateAge(this.birth)}\nDate of birth: ${this.birth}\nMoney: ${this.money}`)
   },
 
   addMoney : function (amount, reason) {
