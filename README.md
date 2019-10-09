@@ -18,7 +18,7 @@ Create a **function/constructor** for working with bank account data of a person
 - Use `this` to describe these methods.
 
 
-```js
+```jsa
 const dmytro = new Person('Dmytro', '26.11.1994', 1000);
 const pavel = new Person('Pavel', '06.06.1990', 400);
 
