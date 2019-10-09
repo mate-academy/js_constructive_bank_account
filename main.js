@@ -32,7 +32,7 @@ const prototypes = {
   },
 
   getAccountHistory:function () {
-    console.log(`Money History : ${this.moneyHistory.toString()}` );
+    console.log(`${this.name}'s money history : ${this.moneyHistory.toString()}` );
   },
 
   createHistory: function(amount, reason) {
