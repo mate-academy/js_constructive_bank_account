@@ -1,23 +1,24 @@
 'use strict'
 
-Person.prototype = {
-    getInfo: function() {
-        console.log(`Name: ${this.Name}, Age: ${this.Age()}, Amount: ${this.Amount}`);
-    },
-    addMoney: function(amount, info) {
-        this.currentAmount += amount;
-        this.Amount = `${this.currentAmount}$`;
-        this.accountHistory.push(`${info}: ${this.currentAmount}`);
-    },
-    withdrawMoney: function(amount, info) {
-        this.currentAmount -= amount;
-        this.Amount = `${this.currentAmount}$`;
-        this.accountHistory.push(`${info}: -${amount}`);
-    },
-    getAccountHistory: function() {
-        console.log(this.accountHistory);
-    }
-}
+Person.prototype.getInfo = function() {
+    console.log(`Name: ${this.Name}, Age: ${this.Age()}, Amount: ${this.Amount}`);
+};
+
+Person.prototype.addMoney = function(amount, info) {
+    this.currentAmount += amount;
+    this.Amount = `${this.currentAmount}$`;
+    this.accountHistory.push(`${info}: ${this.currentAmount}`);
+};
+
+Person.prototype.withdrawMoney = function(amount, info) {
+    this.currentAmount -= amount;
+    this.Amount = `${this.currentAmount}$`;
+    this.accountHistory.push(`${info}: -${amount}`);
+};
+
+Person.prototype.getAccountHistory = function() {
+    console.log(this.accountHistory);
+};
 
 function Person(name, dateOfBirth, initialAmount) {
     this.currentAmount = initialAmount;
