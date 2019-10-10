@@ -1,4 +1,12 @@
-function getAge(dateOfBirth) {
+function Person(name, dateOfBirth, amount) {
+  this.name = name;
+  this.dateOfBirth = dateOfBirth;
+  this.amount = amount;
+  this.age = this.getAge(this.dateOfBirth);
+  this.accountHistory = [`'Initial: ${this.amount}'`];
+}
+
+Person.prototype.getAge = function (dateOfBirth) {
   const dateArr = dateOfBirth.split('.');
   const year = dateArr[2];
   const month = dateArr[1];
@@ -10,30 +18,23 @@ function getAge(dateOfBirth) {
   yearNow - year - 1 : yearNow - year;
 }
 
-function Person(name, dateOfBirth, amount) {
-  this.name = name;
-  this.dateOfBirth = dateOfBirth;
-  this.amount = amount;
-  this.age = getAge(this.dateOfBirth);
-  this.accountHistory = [`'Initial: ${this.amount}'`];
 
-  this.getInfo = function() {
-    console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.amount}\$`);
-  }
+Person.prototype.getInfo = function() {
+  console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.amount}\$`);
+}
 
-  this.addMoney = function(money, info) {
-    this.amount += money;
-    this.accountHistory.push(`'${info}: ${money}'`);
-  }
+Person.prototype.addMoney = function(money, info) {
+  this.amount += money;
+  this.accountHistory.push(`'${info}: ${money}'`);
+}
 
-  this.withdrawMoney = function(money, info) {
-    this.amount -= amount;
-    this.accountHistory.push(`'${info}: -${money}'`);
-  }
+Person.prototype.withdrawMoney = function(money, info) {
+  this.amount -= money;
+  this.accountHistory.push(`'${info}: -${money}'`);
+}
 
-  this.getAccountHistory = function() {
-    console.log(`[ ${this.accountHistory.join(', ')}]`);
-  }
+Person.prototype.getAccountHistory = function() {
+  console.log(`[ ${this.accountHistory.join(', ')}]`);
 }
 
 const dmytro = new Person('Dmytro', '26.11.1994', 1000);
