@@ -1,64 +1,45 @@
 function Person(name, date, amount) {
   this.name = name; 
   this.date = date; 
-  this.age = this.yearCount(this.date); 
+  this.age = getAge(date); 
   this.amount = amount; 
   this.accountHistory = [`Initial: ${amount}`];
+
+  function getAge(date) {
+    const birthDay = date.split('.')[0]; 
+    const birthMonth = date.split('.')[1]; 
+    const birthYear = date.split('.')[2]; 
+    let yearNow = new Date().getFullYear();
+    let monthNow = new Date().getMonth() + 1;
+    let dayNow = new Date().getDate();
+
+    if (monthNow === birthMonth && dayNow < birthDay || monthNow < birthMonth) {
+      return yearNow - birthYear - 1;
+    } else {
+      return yearNow - birthYear;
+    }
+  }; 
 }
 
-let obj = {
-  yearCount(date) {
-    let thisYear = new Date().getFullYear();
-    let birthYear = this.date.slice(-4); 
-    return thisYear - birthYear;  
-  },
+Person.prototype.getInfo = function() {
+  console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.amount}$`); 
+};
 
-  getInfo() {
-    console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.amount}$`); 
-  },
+Person.prototype.addMoney = function(money, info) {
+  this.amount += money; 
+  this.accountHistory.push(`${info}: ${money}`); 
+};
 
-  addMoney(money, info) {
-    this.amount += money; 
-    this.accountHistory.push(`${info}: ${money}`); 
-  }, 
+Person.prototype.withdrawMoney = function(money, info) {
+  this.amount -= money;
+  this.accountHistory.push(`${info}: -${money}`);
+};
 
-  withdrawMoney(money, info) {
-    this.amount -= money;
-    this.accountHistory.push(`${info}: -${money}`);
-  }, 
+Person.prototype.getAccountHistory = function() {
+  console.log(this.accountHistory.join(', ')); 
+};
 
-  getAccountHistory() {
-    console.log(this.accountHistory.join(', ')); 
-  }
-}
-
-Person.prototype = obj; 
-Person.constructor = Person; 
-// Person.prototype.yearCount = function(date) {
-//   let thisYear = new Date().getFullYear();
-//   let birthYear = this.date.slice(-4); 
-//   return thisYear - birthYear;  
-// };
-
-// Person.prototype.getInfo = function() {
-//   console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.amount}$`); 
-// };
-
-// Person.prototype.addMoney = function(money, info) {
-//   this.amount += money; 
-//   this.accountHistory.push(`${info}: ${money}`); 
-// };
-
-// Person.prototype.withdrawMoney = function(money, info) {
-//   this.amount -= money;
-//   this.accountHistory.push(`${info}: -${money}`);
-// };
-
-// Person.prototype.getAccountHistory = function() {
-//   console.log(this.accountHistory.join(', ')); 
-// };
-
-
+//------------------------------------------------------------------------
 const dmytro = new Person('Dmytro', '26.11.1994', 1000);
 const pavel = new Person('Pavel', '06.06.1990', 400);
 
