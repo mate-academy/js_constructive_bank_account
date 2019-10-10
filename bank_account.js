@@ -3,17 +3,17 @@ function Person(name, birthDate, amount) {
   this.birthDate = birthDate;
   this.amount = amount;
   this.age = getAge(this.birthDate);
-  this.accountHistory = [`Initial: ${this.amount}`];
+  this.accountHistory = [{name: 'initial', value: this.amount}];
 }
 
 function getAge(birthDate) {
-  const normalizeDate = birthDate.split('.');
-  let tmp = normalizeDate[0];
-  normalizeDate[0] = normalizeDate[1];
-  normalizeDate[1] = tmp;
-  birthDate = normalizeDate.join('.')
+  birthDate = birthDate.split('.').reverse().join('.');
   let age = Math.abs(new Date(Date.now() - Date.parse(birthDate)).getUTCFullYear() - 1970);
   return age;
+}
+
+function pushItems(accountHistory, amount, source) {
+  accountHistory.push({name: source, value: amount});
 }
 
 Person.prototype.getInfo = function() {
@@ -22,14 +22,18 @@ Person.prototype.getInfo = function() {
 
 Person.prototype.addMoney = function(amount, source) {
   this.amount += amount;
-  this.accountHistory.push(`${source}: ${amount}`);
+  pushItems(this.accountHistory, amount, source);
 }
 
-Person.prototype.withdrawMoney = function(amount, target) {
+Person.prototype.withdrawMoney = function(amount, source) {
   this.amount -= amount;
-  this.accountHistory.push(`${target}: -${amount}`);
+  pushItems(this.accountHistory, -amount, source);
 }
 
 Person.prototype.getAccountHistory = function() {
-  console.log(this.accountHistory);
+  const historyList = [];
+  for (let keys of this.accountHistory) {
+    historyList.push(`${keys.name}: ${keys.value}`);
+  }
+  console.log(historyList);
 }
