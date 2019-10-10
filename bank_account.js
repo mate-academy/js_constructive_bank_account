@@ -17,7 +17,7 @@ function pushItems(accountHistory, amount, source) {
 }
 
 Person.prototype.getInfo = function() {
-  console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.amount}\$`);
+  return (`Name: ${this.name}, Age: ${this.age}, Amount: ${this.amount}\$`);
 }
 
 Person.prototype.addMoney = function(amount, source) {
@@ -35,5 +35,5 @@ Person.prototype.getAccountHistory = function() {
   for (let keys of this.accountHistory) {
     historyList.push(`${keys.name}: ${keys.value}`);
   }
-  console.log(historyList);
+  return historyList;
 }
