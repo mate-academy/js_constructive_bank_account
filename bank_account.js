@@ -2,11 +2,12 @@ function Person(name, dateOfBirth, balance){
     this.name = name;
     this.dateOfBirth = dateOfBirth;
     this.balance = balance;
-    this.age = function () {
-        const dobDate = this.dateOfBirth.split('.').reverse().join('-');
-        return Math.floor((new Date() - new Date(dobDate).getTime()) / 3.15576e+10)
-    };
     this.history = [{name: 'Initial', value: this.balance}];
+}
+
+function getAge(birthDate) {
+    const dobDate = birthDate.split('.').reverse().join('-');
+    return Math.floor((new Date() - new Date(dobDate).getTime()) / 3.15576e+10)
 }
 
 function pushItems(history, amount, transaction) {
@@ -14,7 +15,7 @@ function pushItems(history, amount, transaction) {
 }
 
 Person.prototype.getInfo = function () {
-    return `Name: ${this.name}, Age: ${this.age(this.dateOfBirth)}, Amount: ${this.balance}$`
+    return `Name: ${this.name}, Age: ${getAge(this.dateOfBirth)}, Amount: ${this.balance}$`
 };
 
 Person.prototype.addMoney = function (sum, transaction) {
@@ -41,4 +42,4 @@ console.log(dmytro.getInfo()); // Name: Dmytro, Age: 24, Amount: 2500$
 dmytro.withdrawMoney(500, 'apartment rent');
 console.log(dmytro.getAccountHistory()); // [ 'Initial: 1000', 'salary: 2000', 'new phone: -500', 'apartment rent: -500']
 
-pavel.getInfo(); // // Name: Pavel, Age: 29, Amount: 400$
+console.log(pavel.getInfo()); // // Name: Pavel, Age: 29, Amount: 400$
