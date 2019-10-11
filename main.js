@@ -3,40 +3,42 @@ const Person = function (name, birth , money) {
   this.name = name;
   this.birth = birth;
   this.money = money;
-  this.moneyHistory = [];
+  this.moneyHistory = [{name: 'Initial', value: this.money}];
 };
 
 const prototypes = {
 
-  calculateAge: function(birthday) {
+  _calculateAge: function(birthday) {
     const bDay = birthday.split('.').reverse().join(', ');
     const age = Date.now() - new Date(bDay).getTime();
     const userAge = new Date(age);
     return Math.abs(userAge.getUTCFullYear() - 1970);
   },
 
+  _createHistory: function(amount, reason) {
+    this.moneyHistory.push({name: reason, value: amount});
+  },
+
   getInfo : function () {
-    console.log(`Client: ${this.name}\nAge: ${this.calculateAge(this.birth)}\nDate of birth: ${this.birth}\nMoney: ${this.money}`)
+    return `Client: ${this.name}\nAge: ${this._calculateAge(this.birth)}\nDate of birth: ${this.birth}\nAmount: ${this.money}`;
   },
 
   addMoney : function (amount, reason) {
     this.money += amount;
-    this.createHistory(amount, reason);
-    console.log(`${this.name}'s balance is: ${this.money}, added  ${amount} due to ${reason}`)
+    this._createHistory(amount, reason);
+    return `${this.name}'s balance is: ${this.money}, added  ${amount} due to ${reason}`;
   },
 
   withdrawMoney: function(amount, reason) {
     this.money -= amount;
-    this.createHistory(`-${amount}`, reason);
-    console.log(`${this.name}'s balance is: ${this.money}, spent  ${amount} due to ${reason}`);
+    this._createHistory(`-${amount}`, reason);
+    return `${this.name}'s balance is: ${this.money}, spent  ${amount} due to ${reason}`;
   },
 
   getAccountHistory:function () {
-    console.log(`${this.name}'s money history : ${this.moneyHistory.toString()}` );
-  },
-
-  createHistory: function(amount, reason) {
-    this.moneyHistory.push(`${reason}: ${amount}`);
+    const history = [];
+    this.moneyHistory.forEach(item => history.push(` ${item.name}: ${item.value}`));
+    return `${this.name}'s money history --- ${history.toString()}`;
   }
 
 };
@@ -46,10 +48,11 @@ Person.prototype = prototypes;
 const dmytro = new Person('Dmytro', '26.11.1994', 1000);
 const pavel = new Person('Pavel', '06.06.1990', 400);
 
-dmytro.getInfo();
-dmytro.addMoney(2000, 'salary');
-dmytro.withdrawMoney(500, 'new phone');
-dmytro.getInfo();
-dmytro.withdrawMoney(500, 'apartment rent');
-dmytro.getAccountHistory();
-pavel.getInfo();
+console.log(dmytro.getInfo());
+console.log(dmytro.addMoney(2000, 'salary'));
+console.log(dmytro.withdrawMoney(500, 'new phone'));
+console.log(dmytro.getInfo());
+console.log(dmytro.withdrawMoney(500, 'apartment rent'));
+console.log(dmytro.getAccountHistory());
+console.log(pavel.getInfo());
+
