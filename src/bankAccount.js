@@ -1,42 +1,44 @@
 function Person(name, date, amount) {
   this.name = name; 
   this.date = date; 
-  this.age = getAge(date); 
   this.amount = amount; 
-  this.accountHistory = [`Initial: ${amount}`];
-
-  function getAge(date) {
-    const birthDay = date.split('.')[0]; 
-    const birthMonth = date.split('.')[1]; 
-    const birthYear = date.split('.')[2]; 
-    let yearNow = new Date().getFullYear();
-    let monthNow = new Date().getMonth() + 1;
-    let dayNow = new Date().getDate();
-
-    if (monthNow === birthMonth && dayNow < birthDay || monthNow < birthMonth) {
-      return yearNow - birthYear - 1;
-    } else {
-      return yearNow - birthYear;
-    }
-  }; 
-}
-
-Person.prototype.getInfo = function() {
-  console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.amount}$`); 
+  this.accountHistory = {Initial: amount};
 };
 
-Person.prototype.addMoney = function(money, info) {
+Person.prototype.getAge = function(date) {
+  const [birthDay, birthMonth, birthYear] =  date.split('.'); 
+  const yearNow = new Date().getFullYear(), 
+        monthNow = new Date().getMonth() + 1, 
+        dayNow = new Date().getDate();
+
+  let age = ((monthNow === birthMonth && dayNow < birthDay || monthNow < birthMonth) ? yearNow - birthYear - 1 : yearNow - birthYear);
+
+  return this.age = age; 
+}; 
+
+Person.prototype.getInfo = function() {
+  console.log(`Name: ${this.name}, Age: ${this.getAge(this.date)}, Amount: ${this.amount}$`); 
+};
+
+Person.prototype.addHistory = function(money, info) {
   this.amount += money; 
-  this.accountHistory.push(`${info}: ${money}`); 
+  this.accountHistory[info] =  money; 
+}
+
+Person.prototype.addMoney = function(money, info) {
+  this.addHistory(money, info); 
 };
 
 Person.prototype.withdrawMoney = function(money, info) {
-  this.amount -= money;
-  this.accountHistory.push(`${info}: -${money}`);
+  this.addHistory(-money, info); 
 };
 
 Person.prototype.getAccountHistory = function() {
-  console.log(this.accountHistory.join(', ')); 
+  let arr = []; 
+  for (let items of Object.entries(this.accountHistory)) {
+    arr.push(items.join(': ')); 
+  }
+  return arr.join(", ");  
 };
 
 //------------------------------------------------------------------------
@@ -51,3 +53,4 @@ dmytro.withdrawMoney(500, 'apartment rent');
 dmytro.getAccountHistory(); // [ 'Initial: 1000', 'salary: 2000', 'new phone: -500', 'apartment rent: -500']
 
 pavel.getInfo(); // // Name: Pavel, Age: <calculate yourself>, Amount: 400$
+console.log(dmytro.age); 
