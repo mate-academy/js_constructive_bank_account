@@ -5,14 +5,14 @@ function Person(name, dateOfBirth, initialAmount) {
     this.accountHistory = [
         { name: 'Initial', value: initialAmount }
     ];
-    this.Name = name;
+    this.name = name;
     this.Age = () => {
         const currentDate = new Date();
         let birthday = new Date(dateOfBirth.split('.').reverse().join('-'));
         var diff = currentDate.getTime() - birthday.getTime();
         return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
     };
-    this.Amount = `${this.currentAmount}$`;
+    this.amount = `${this.currentAmount}$`;
 }
 
 Person.prototype.pushHist = function(accountHistory, value, name) {
@@ -20,19 +20,19 @@ Person.prototype.pushHist = function(accountHistory, value, name) {
 };
 
 Person.prototype.getInfo = function() {
-    return `Name: ${this.Name}, Age: ${this.Age()}, Amount: ${this.Amount}`;
+    return `Name: ${this.name}, Age: ${this.Age()}, Amount: ${this.amount}`;
 };
 
 Person.prototype.addMoney = function(amount, info) {
     this.currentAmount += amount;
-    this.Amount = `${this.currentAmount}$`;
+    this.amount = `${this.currentAmount}$`;
     this.pushHist(this.accountHistory, amount, info);
     return `Current amount is ${this.currentAmount}$`;
 };
 
 Person.prototype.withdrawMoney = function(amount, info) {
     this.currentAmount -= amount;
-    this.Amount = `${this.currentAmount}$`;
+    this.amount = `${this.currentAmount}$`;
     this.pushHist(this.accountHistory, -amount, info);
     return `Current amount is ${this.currentAmount}`;
 };
