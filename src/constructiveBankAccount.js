@@ -5,7 +5,7 @@ function Person(name, birthday, amount){
   this.history = [{name: 'Initial', sum: this.amount}];
 }
 
-function getAge(date) {
+Person.prototype.getAge = function (date) {
   const [day, month, year] = date.split('.');
   return new Date(new Date() - new Date(year, month, day)).getFullYear() - 1970;
 }
