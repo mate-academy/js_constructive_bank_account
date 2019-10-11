@@ -2,7 +2,7 @@ function Person(name, date, amount) {
   this.name = name; 
   this.date = date; 
   this.amount = amount; 
-  this.accountHistory = {Initial: amount};
+  this.accountHistory = [{Initial: amount}];
 };
 
 Person.prototype.getAge = function(date) {
@@ -22,7 +22,7 @@ Person.prototype.getInfo = function() {
 
 Person.prototype.addHistory = function(money, info) {
   this.amount += money; 
-  this.accountHistory[info] =  money; 
+  this.accountHistory.push({info: money}); 
 }
 
 Person.prototype.addMoney = function(money, info) {
@@ -35,10 +35,10 @@ Person.prototype.withdrawMoney = function(money, info) {
 
 Person.prototype.getAccountHistory = function() {
   let arr = []; 
-  for (let items of Object.entries(this.accountHistory)) {
-    arr.push(items.join(': ')); 
+  for (let i = 0; i < this.accountHistory.length; i++) {
+    arr.push(Object.entries(this.accountHistory[i]).flat(1).join(': ')); 
   }
-  return arr.join(", ");  
+  return arr.join(', '); 
 };
 
 //------------------------------------------------------------------------
@@ -53,4 +53,3 @@ dmytro.withdrawMoney(500, 'apartment rent');
 dmytro.getAccountHistory(); // [ 'Initial: 1000', 'salary: 2000', 'new phone: -500', 'apartment rent: -500']
 
 pavel.getInfo(); // // Name: Pavel, Age: <calculate yourself>, Amount: 400$
-console.log(dmytro.age); 
