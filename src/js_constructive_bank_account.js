@@ -44,7 +44,7 @@ Person.prototype.getAccountHistory = function() {
 
 Person.prototype.withdrawMoney = function(sum, add) {
   this.money -= sum;
-  this.addLog(sum, '-' + add)
+  this.addLog('-' + sum, add)
 };
 
 const dmytro = new Person("Dmytro", "26.11.1994", 1000);
