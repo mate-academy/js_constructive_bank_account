@@ -1,28 +1,10 @@
 'use strict'
 
-Person.prototype.getInfo = function() {
-    console.log(`Name: ${this.Name}, Age: ${this.Age()}, Amount: ${this.Amount}`);
-};
-
-Person.prototype.addMoney = function(amount, info) {
-    this.currentAmount += amount;
-    this.Amount = `${this.currentAmount}$`;
-    this.accountHistory.push(`${info}: ${this.currentAmount}`);
-};
-
-Person.prototype.withdrawMoney = function(amount, info) {
-    this.currentAmount -= amount;
-    this.Amount = `${this.currentAmount}$`;
-    this.accountHistory.push(`${info}: -${amount}`);
-};
-
-Person.prototype.getAccountHistory = function() {
-    console.log(this.accountHistory);
-};
-
 function Person(name, dateOfBirth, initialAmount) {
     this.currentAmount = initialAmount;
-    this.accountHistory = [`Initial: ${initialAmount}`];
+    this.accountHistory = [
+        { name: 'Initial', value: initialAmount }
+    ];
     this.Name = name;
     this.Age = () => {
         const currentDate = new Date();
@@ -32,3 +14,33 @@ function Person(name, dateOfBirth, initialAmount) {
     };
     this.Amount = `${this.currentAmount}$`;
 }
+
+Person.prototype.pushHist = function(accountHistory, value, name) {
+    accountHistory.push({ name, value });
+};
+
+Person.prototype.getInfo = function() {
+    return `Name: ${this.Name}, Age: ${this.Age()}, Amount: ${this.Amount}`;
+};
+
+Person.prototype.addMoney = function(amount, info) {
+    this.currentAmount += amount;
+    this.Amount = `${this.currentAmount}$`;
+    this.pushHist(this.accountHistory, amount, info);
+    return `Current amount is ${this.currentAmount}$`;
+};
+
+Person.prototype.withdrawMoney = function(amount, info) {
+    this.currentAmount -= amount;
+    this.Amount = `${this.currentAmount}$`;
+    this.pushHist(this.accountHistory, -amount, info);
+    return `Current amount is ${this.currentAmount}`;
+};
+
+Person.prototype.getAccountHistory = function() {
+    let shortHist = [];
+    for (const obj of this.accountHistory) {
+        shortHist.push(`${obj.name}: ${obj.value}`);
+    }
+    return shortHist;
+};
