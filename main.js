@@ -11,7 +11,7 @@ const Person = function(name, birthDay, amount) {
     this.name = name;
     this.birthDay = birthDay;
     this.amount = amount;
-    this.history = [`Initial: ${amount}`];
+    this.history = [`Initia: ${amount}`];
 }
 
 
