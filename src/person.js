@@ -4,7 +4,7 @@ function Person(name, birthDate, money) {
     this.money = money;
     this.accountHistory = [];
 
-    this.accountHistory.push(`Initial: ${money}`)
+    this.accountHistory.push({name: 'Initial', value: money})
 }
 
 function calculateAge(birthday) {
@@ -14,24 +14,45 @@ function calculateAge(birthday) {
 }
 
 Person.prototype.getInfo = function () {
-    console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.money}$`)
+    return `Name: ${this.name}, Age: ${this.age}, Amount: ${this.money}$`;
 };
 
 Person.prototype.addMoney = function (amount, source) {
-    this.money += amount;
-    this.accountHistory.push(`${source}: ${amount}`)
+    return 'Money income: ' + this.refreshAccountHistory(amount, source);
 };
 
-Person.prototype.withdrawMoney = function (amount, purpose) {
-    this.money -= amount;
-    this.accountHistory.push(`${purpose}: -${amount}`);
+Person.prototype.withdrawMoney = function (amount, source) {
+    return 'Money withdraw: ' + this.refreshAccountHistory(-amount, source);
+};
+
+Person.prototype.refreshAccountHistory = function (amount, source) {
+    this.money += amount;
+    this.accountHistory.push({name: source, value: amount});
+    return JSON.stringify({name: source, value: amount});
 };
 
 Person.prototype.getAccountHistory = function () {
-    console.log(this.accountHistory);
+   let arr = [];
+   for (let elem of this.accountHistory) {
+       let strArr = [];
+       for (let key in elem) {
+           strArr.push(elem[key]);
+       }
+       arr.push(strArr.join(': '));
+   }
+   return arr;
 };
 
 
 const dmytro = new Person('Dmytro', '26.11.1994', 1000);
 const pavel = new Person('Pavel', '06.06.1990', 400);
+
+console.log(dmytro.getInfo()); // print `Name: Dmytro, Age: <calculate yourself>, Amount: 1000$`
+console.log(dmytro.addMoney(2000, 'salary'));
+console.log(dmytro.withdrawMoney(500, 'new phone'));
+console.log(dmytro.getInfo()); // Name: Dmytro, Age: <calculate yourself>, Amount: 2500$
+console.log(dmytro.withdrawMoney(500, 'apartment rent'));
+console.log(dmytro.getAccountHistory()); // [ 'Initial: 1000', 'salary: 2000', 'new phone: -500', 'apartment rent: -500']
+
+console.log(pavel.getInfo()); // // Name: Pavel, Age: <calculate yourself>, Amount: 400$
 
