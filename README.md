@@ -69,5 +69,3 @@ dmytro.getAccountHistory(); // [ 'Initial: 1000', 'salary: 2000', 'new phone: -5
 
 pavel.getInfo(); // // Name: Pavel, Age: <calculate yourself>, Amount: 400$
 ```
-
-Используйте `new Date ()` для получения текущей даты: она может понадобиться для сравнения с датой рождения человека и расчета его возраста.
