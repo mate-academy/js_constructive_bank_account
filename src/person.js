@@ -1,17 +1,17 @@
 function Person(name, birthDate, money) {
     this.name = name;
-    this.age = calculateAge(birthDate);
+    this.age = this.calculateAge(birthDate);
     this.money = money;
     this.accountHistory = [];
 
     this.accountHistory.push({name: 'Initial', value: money})
 }
 
-function calculateAge(birthday) {
+Person.prototype.calculateAge = function(birthday) {
     let ageDifMs = Date.now() - new Date(birthday.split('.').reverse().join(', ')).getTime();
     let ageDate = new Date(ageDifMs);
     return Math.abs(ageDate.getUTCFullYear() - 1970);
-}
+};
 
 Person.prototype.getInfo = function () {
     return `Name: ${this.name}, Age: ${this.age}, Amount: ${this.money}$`;
