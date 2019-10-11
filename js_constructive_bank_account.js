@@ -1,14 +1,31 @@
+function Person(name = anonymous, dateOfBirth, amount = 0) {
+    this.__proto__ = Person.prototype;
+
+    this.name = name;
+    this.dateOfBirth = dateOfBirth;
+    this.amount = amount;
+
+    const [day, month, year] = dateOfBirth.split('.');
+    this.day = +day;
+    this.month = +month;
+    this.year = +year;
+    this.log = [{ transaction: 'Initial', amount: this.amount }];
+}
+
 Person.prototype = {
 
-    getAge: function getAge() {
-        let yearNow = new Date().getFullYear();
-        let monthNow = new Date().getMonth() + 1;
-        let dayNow = new Date().getDate();
+    _getAge: function getAge() {
+        const yearNow = new Date().getFullYear();
+        const monthNow = new Date().getMonth() + 1;
+        const dayNow = new Date().getDate();
+        let result;
         if (monthNow === this.month && dayNow < this.day || monthNow < this.month) {
-            return yearNow - this.year - 1;
+            result = yearNow - this.year - 1;
         } else {
-            return yearNow - this.year;
+            result = yearNow - this.year;
         }
+
+        return result;
     },
 
     getInfo: function() {
@@ -27,27 +44,14 @@ Person.prototype = {
 
     getAccountHistory: function() {
 
-        let result = [];
+        const result = [];
         for (const value of this.log) {
             result.push(`${value.transaction}: ${value.amount}`);
         }
+
         return result;
     }
 };
-
-function Person(name = anonymous, dateOfBirth, amount = 0) {
-    this.__proto__ = Person.prototype;
-
-    this.name = name;
-    this.dateOfBirth = dateOfBirth;
-    this.amount = amount;
-
-    const [day, month, year] = dateOfBirth.split('.');
-    this.day = +day;
-    this.month = +month;
-    this.year = +year;
-    this.log = [{ transaction: 'Initial', amount: this.amount }];
-}
 
 const dmytro = new Person('Dmytro', '26.10.1994', 1000);
 const pavel = new Person('Pavel', '06.06.1990', 400);
