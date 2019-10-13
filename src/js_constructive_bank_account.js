@@ -20,9 +20,7 @@ Person.prototype._getAge = function() {
 };
 
 Person.prototype.getInfo = function() {
-  console.log(
-    `Name: ${this.name}, Age: ${this._getAge()}, Amount: ${this.money}$`
-  );
+  return `Name: ${this.name}, Age: ${this._getAge()}, Amount: ${this.money}$`;
 };
 
 Person.prototype.addLog = function (sum, add) {
