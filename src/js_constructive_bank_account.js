@@ -39,7 +39,7 @@ Person.prototype.getAccountHistory = function() {
   this.log.forEach((element, i) => {
     history[i] = element.name + ' ' + element.value;
   });
-  console.log(history);
+  return history;
 };
 
 Person.prototype.withdrawMoney = function(sum, add) {
