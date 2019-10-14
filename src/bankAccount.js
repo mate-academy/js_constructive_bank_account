@@ -22,7 +22,7 @@ Person.prototype.getInfo = function() {
 
 Person.prototype.addHistory = function(money, info) {
   this.amount += money; 
-  this.accountHistory.push({info: money}); 
+  this.accountHistory.push({ [info]: money }); 
 }
 
 Person.prototype.addMoney = function(money, info) {
@@ -50,6 +50,6 @@ dmytro.addMoney(2000, 'salary');
 dmytro.withdrawMoney(500, 'new phone');
 dmytro.getInfo(); // Name: Dmytro, Age: <calculate yourself>, Amount: 2500$
 dmytro.withdrawMoney(500, 'apartment rent');
-dmytro.getAccountHistory(); // [ 'Initial: 1000', 'salary: 2000', 'new phone: -500', 'apartment rent: -500']
+console.log(dmytro.getAccountHistory()); // [ 'Initial: 1000', 'salary: 2000', 'new phone: -500', 'apartment rent: -500']
 
 pavel.getInfo(); // // Name: Pavel, Age: <calculate yourself>, Amount: 400$
