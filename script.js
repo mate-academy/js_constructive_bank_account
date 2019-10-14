@@ -3,33 +3,39 @@ function Person(name, dateOfBirth, moneyAmount) {
   this.name = name;
   [this.dayOfBirth, this.monthOfBirth, this.yearOfBirth, this.dateOfBirth] = [...dateOfBirth.split('.'), dateOfBirth];
   this.moneyAmount = moneyAmount;
-  this.accountHistory = [];
-  this.accountHistory.push(`Initial: ${moneyAmount}`);
+  this.accountHistory = [{transactionInfo: 'Initial', money: moneyAmount}]
 }
 Person.prototype.getInfo = function () {
   console.log(`Name: ${this.name}, Age: ${this._getAge()}, Amount: ${this.moneyAmount}$`);
+  return `Name: ${this.name}, Age: ${this._getAge()}, Amount: ${this.moneyAmount}$`;
 }
 Person.prototype._getAge = function () {
   let date = new Date();
   let [year, month, day] = [date.getFullYear(), (date.getMonth() + 1), date.getDate()];
   let age = year - this.yearOfBirth;
-  if ((month - +this.monthOfBirth) < 0 ) {
-    return --age;
-  } else if((month - +this.monthOfBirth) === 0 && (day - +this.dayOfBirth) < 0) {
+  if (month < +this.monthOfBirth ||
+    (month === +this.monthOfBirth) && (day < +this.dayOfBirth)) {
     return --age;
   }
   return age;
 }
-Person.prototype.addMoney = function (money, transactionInfo) {
-  this.accountHistory.push(`${transactionInfo}: ${money}`);
+Person.prototype._changeMoneyHistory = function (money, transactionInfo) {
+  this.accountHistory.push({transactionInfo: transactionInfo, money: money});
   this.moneyAmount += money;
+  return this.moneyAmount;
+}
+Person.prototype.addMoney = function (money, transactionInfo) {
+  return this._changeMoneyHistory(money, transactionInfo);
 }
 Person.prototype.withdrawMoney = function (money, transactionInfo) {
-  this.accountHistory.push(`${transactionInfo}: -${money}`);
-  this.moneyAmount -= money;
+  return this._changeMoneyHistory(money * (-1), transactionInfo);
 }
 Person.prototype.getAccountHistory = function () {
-  console.log(this.accountHistory);
+  let arrHistory = [];
+  for (let item of this.accountHistory) {
+    arrHistory.push(`${item.transactionInfo}: ${item.money}`);
+  }
+  console.log(arrHistory);
 }
 
 const dmytro = new Person('Dmytro', '26.11.1994', 1000);
