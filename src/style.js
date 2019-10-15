@@ -11,7 +11,7 @@ Person.prototype.getAge = function() {
 };
 
 Person.prototype.getInfo = function() {
-  return (`name: ${this.name}, Age: ${this.getAge(this.dateOfBirthday)}, Amount: ${this.balance}$`);
+  return (`name: ${this.name}, Age: ${this.getAge()}, Amount: ${this.balance}$`);
 };
 
 Person.prototype.pushInfo = function(accountHistory, amount, srcMassage) {
