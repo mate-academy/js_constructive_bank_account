@@ -43,9 +43,7 @@ Person.prototype.withdrawMoney = function(amount, description) {
 };
 
 Person.prototype.getAccountHistory = function() {
-    return this.history.map(item => {
-        `${item.description}: ${item.amount}`;
-    });
+    return this.history.map(item => `${item.description}: ${item.amount}`);
 };
 
 const dmytro = new Person('Dmytro', '26.11.1994', 1000);
