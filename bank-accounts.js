@@ -5,36 +5,34 @@ function Person (name, dateOfBirth, money) {
   this.history = [`Initial: ${money}`];
 }
 
-Person.prototype = {
-  getClientAge: function() {
-        const arrayBDay = this.dateOfBirth.split('.').reverse();
-        const bDay = new Date(...arrayBDay);
-        const ageDifMs = Date.now() - bDay.getTime();
-        const ageDate = new Date(ageDifMs); // miliseconds from epoch
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
-    },
+Person.prototype.getClientAge = function() {
+  const arrayBDay = this.dateOfBirth.split('.').reverse();
+  const bDay = new Date(...arrayBDay);
+  const ageDifMs = Date.now() - bDay.getTime();
+  const ageDate = new Date(ageDifMs); // miliseconds from epoch
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+};
 
-    logHistory: function(cash, info) {
-        this.history.push(`${info}: ${cash}`);
-    },
+Person.prototype.logHistory = function(cash, info) {
+  this.history.push(`${info}: ${cash}`);
+};
 
-    getInfo: function() {
-        console.log(`Name: ${this.name}, Age: ${this.getClientAge()}, Amount: ${this.money}$`)
-    },
+Person.prototype.getInfo = function() {
+  console.log(`Name: ${this.name}, Age: ${this.getClientAge()}, Amount: ${this.money}$`)
+};
 
-    addMoney: function(cash, info) {
-        this.money += cash;
-        this.logHistory(cash, info);
-    },
+Person.prototype.addMoney = function(cash, info) {
+  this.money += cash;
+  this.logHistory(cash, info);
+};
 
-    withdrawMoney: function(cash, info) {
-        this.money -= cash;
-        this.logHistory(`-${cash}`, info);
-    },
+Person.prototype.withdrawMoney = function(cash, info) {
+  this.money -= cash;
+  this.logHistory(-cash, info);
+};
 
-    getAccountHistory: function() {
-        console.log(this.history);
-    }
+Person.prototype.getAccountHistory = function() {
+  console.log(this.history);
 };
 
 const dmytro = new Person('Dmytro', '26.11.1994', 1000);
