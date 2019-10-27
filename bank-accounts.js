@@ -2,7 +2,7 @@ function Person (name, dateOfBirth, money) {
   this.name = name;
   this.dateOfBirth = dateOfBirth;
   this.money = money;
-  this.history = [`Initial: ${money}`];
+  this.history = [{name: `Initial`, value: `${money}`}];
 }
 
 Person.prototype.getClientAge = function() {
@@ -14,11 +14,11 @@ Person.prototype.getClientAge = function() {
 };
 
 Person.prototype.logHistory = function(cash, info) {
-  this.history.push(`${info}: ${cash}`);
+  this.history.push({name: `${info}`, value: cash});
 };
 
 Person.prototype.getInfo = function() {
-  console.log(`Name: ${this.name}, Age: ${this.getClientAge()}, Amount: ${this.money}$`)
+  return (`Name: ${this.name}, Age: ${this.getClientAge()}, Amount: ${this.money}$`)
 };
 
 Person.prototype.addMoney = function(cash, info) {
@@ -32,7 +32,7 @@ Person.prototype.withdrawMoney = function(cash, info) {
 };
 
 Person.prototype.getAccountHistory = function() {
-  console.log(this.history);
+  return (this.history);
 };
 
 const dmytro = new Person('Dmytro', '26.11.1994', 1000);
