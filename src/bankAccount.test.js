@@ -2,6 +2,19 @@
 
 const BankAccount = require('./bankAccount');
 
+const getAge = () => {
+  const today = new Date();
+  const birthDate = new Date('26.11.1994'.split('.').reverse());
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age = age - 1;
+  }
+
+  return age;
+};
+
 test('Should be an object', () => {
   const account = new BankAccount('Dmytro', '26.11.1994', 1000);
 
@@ -29,7 +42,7 @@ test('Should return account info', () => {
   const account = new BankAccount('Dmytro', '26.11.1994', 1000);
 
   expect(account.getInfo())
-    .toBe('Name: Dmytro, Age: 26, Amount: 1000$');
+    .toBe(`Name: Dmytro, Age: ${getAge('26.11.1994')}, Amount: 1000$`);
 });
 
 test('Should add money', () => {
@@ -39,7 +52,7 @@ test('Should add money', () => {
   account.addMoney(400, 'lottery');
 
   expect(account.getInfo())
-    .toBe('Name: Oleg, Age: 27, Amount: 2700$');
+    .toBe(`Name: Oleg, Age: ${getAge('26.09.1993')}, Amount: 2700$`);
 });
 
 test('Should withdraw money', () => {
@@ -49,7 +62,7 @@ test('Should withdraw money', () => {
   account.withdrawMoney(700, 'products');
 
   expect(account.getInfo())
-    .toBe('Name: Oleg, Age: 27, Amount: 700$');
+    .toBe(`Name: Oleg, Age: ${getAge('26.09.1993')}, Amount: 700$`);
 });
 
 test('Should have initial history', () => {
@@ -76,7 +89,7 @@ test('Should change accountHistory', () => {
   const history = account.getAccountHistory();
 
   expect(account.getInfo())
-    .toBe('Name: Oleg, Age: 27, Amount: 3200$');
+    .toBe(`Name: Oleg, Age: ${getAge('26.09.1993')}, Amount: 3200$`);
 
   expect(history[0])
     .toBe('Initial: 1700');
