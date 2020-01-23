@@ -2,23 +2,54 @@
 
 const BankAccount = require('./bankAccount');
 
+test('Should be an object', () => {
+  const account = new BankAccount('Dmytro', '26.11.1994', 1000);
+
+  expect(typeof account)
+    .toBe('object');
+});
+
+test('Should has methods', () => {
+  const account = new BankAccount('Dmytro', '26.11.1994', 1000);
+
+  expect(account.getAccountHistory)
+    .not.toBe(undefined);
+
+  expect(account.getInfo)
+    .not.toBe(undefined);
+
+  expect(account.addMoney)
+    .not.toBe(undefined);
+
+  expect(account.withdrawMoney)
+    .not.toBe(undefined);
+});
+
 test('Should return account info', () => {
   const account = new BankAccount('Dmytro', '26.11.1994', 1000);
 
   expect(account.getInfo())
-    .toBe(`Name: Dmytro, Age: 26, Amount: 1000$`);
+    .toBe('Name: Dmytro, Age: 26, Amount: 1000$');
 });
 
-test('Should make money operations', () => {
+test('Should add money', () => {
   const account = new BankAccount('Oleg', '26.09.1993', 200);
 
   account.addMoney(2100, 'salary');
-  account.withdrawMoney(600, 'new phone');
-  account.withdrawMoney(700, 'products');
   account.addMoney(400, 'lottery');
 
   expect(account.getInfo())
-    .toBe(`Name: Oleg, Age: 27, Amount: 1400$`);
+    .toBe('Name: Oleg, Age: 27, Amount: 2700$');
+});
+
+test('Should withdraw money', () => {
+  const account = new BankAccount('Oleg', '26.09.1993', 2000);
+
+  account.withdrawMoney(600, 'new phone');
+  account.withdrawMoney(700, 'products');
+
+  expect(account.getInfo())
+    .toBe('Name: Oleg, Age: 27, Amount: 700$');
 });
 
 test('Should have initial history', () => {
@@ -45,7 +76,7 @@ test('Should change accountHistory', () => {
   const history = account.getAccountHistory();
 
   expect(account.getInfo())
-    .toBe(`Name: Oleg, Age: 27, Amount: 3200$`);
+    .toBe('Name: Oleg, Age: 27, Amount: 3200$');
 
   expect(history[0])
     .toBe('Initial: 1700');
