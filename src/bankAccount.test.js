@@ -2,94 +2,78 @@
 
 const BankAccount = require('./bankAccount');
 
-const getAge = () => {
-  const today = new Date();
-  const birthDate = new Date('26.11.1994'.split('.').reverse());
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const m = today.getMonth() - birthDate.getMonth();
+test('Can be used as a constructor', () => {
+  const account = new BankAccount('Dmytro', 1000);
 
-  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-    age = age - 1;
-  }
-
-  return age;
-};
-
-test('Should be an object', () => {
-  const account = new BankAccount('Dmytro', '26.11.1994', 1000);
-
-  expect(typeof account)
-    .toBe('object');
+  expect(account)
+    .toBeInstanceOf(BankAccount)
 });
 
-test('Should has methods', () => {
-  const account = new BankAccount('Dmytro', '26.11.1994', 1000);
+test('Should have all the methods in prototype', () => {
+  expect(BankAccount.prototype.getAccountHistory)
+    .toBeInstanceOf(Function);
 
-  expect(account.getAccountHistory)
-    .not.toBe(undefined);
+  expect(BankAccount.prototype.getInfo)
+    .toBeInstanceOf(Function);
 
-  expect(account.getInfo)
-    .not.toBe(undefined);
+  expect(BankAccount.prototype.addMoney)
+    .toBeInstanceOf(Function);
 
-  expect(account.addMoney)
-    .not.toBe(undefined);
-
-  expect(account.withdrawMoney)
-    .not.toBe(undefined);
+  expect(BankAccount.prototype.withdrawMoney)
+    .toBeInstanceOf(Function);
 });
 
-test('Should return account info', () => {
-  const account = new BankAccount('Dmytro', '26.11.1994', 1000);
+test('Should have an account info', () => {
+  const account = new BankAccount('Dmytro', 1000);
 
   expect(account.getInfo())
-    .toBe(`Name: Dmytro, Age: ${getAge('26.11.1994')}, Amount: 1000$`);
+    .toBe(`Name: Dmytro, Amount: 1000$`);
+});
+
+test('Should have an initial history', () => {
+  const account = new BankAccount('Dmytro', 1000);
+  const history = account.getAccountHistory();
+
+  expect(history)
+    .toBeInstanceOf(Array);
+
+  expect(history)
+    .toHaveLength(1)
+
+  expect(history[0])
+    .toBe('Initial: 1000');
 });
 
 test('Should add money', () => {
-  const account = new BankAccount('Oleg', '26.09.1993', 200);
+  const account = new BankAccount('Oleg', 200);
 
   account.addMoney(2100, 'salary');
   account.addMoney(400, 'lottery');
 
   expect(account.getInfo())
-    .toBe(`Name: Oleg, Age: ${getAge('26.09.1993')}, Amount: 2700$`);
+    .toBe(`Name: Oleg, Amount: 2700$`);
 });
 
 test('Should withdraw money', () => {
-  const account = new BankAccount('Oleg', '26.09.1993', 2000);
+  const account = new BankAccount('Oleg', 2000);
 
   account.withdrawMoney(600, 'new phone');
   account.withdrawMoney(700, 'products');
 
   expect(account.getInfo())
-    .toBe(`Name: Oleg, Age: ${getAge('26.09.1993')}, Amount: 700$`);
+    .toBe(`Name: Oleg, Amount: 700$`);
 });
 
-test('Should have initial history', () => {
-  const account = new BankAccount('Dmytro', '26.11.1994', 1000);
-
-  const history = account.getAccountHistory();
-
-  expect(history[0])
-    .toBe('Initial: 1000');
-
-  expect(typeof history)
-    .toBe('object');
-
-  expect(history.length)
-    .toBe(1);
-});
-
-test('Should change accountHistory', () => {
-  const account = new BankAccount('Oleg', '26.09.1993', 1700);
+test('Should update accountHistory', () => {
+  const account = new BankAccount('Oleg', 1700);
 
   account.addMoney(2000, 'salary');
   account.withdrawMoney(500, 'new phone');
 
   const history = account.getAccountHistory();
 
-  expect(account.getInfo())
-    .toBe(`Name: Oleg, Age: ${getAge('26.09.1993')}, Amount: 3200$`);
+  expect(history)
+    .toHaveLength(3);
 
   expect(history[0])
     .toBe('Initial: 1700');
@@ -99,10 +83,4 @@ test('Should change accountHistory', () => {
 
   expect(history[2])
     .toBe('new phone: -500');
-
-  expect(typeof history)
-    .toBe('object');
-
-  expect(history.length)
-    .toBe(3);
 });
