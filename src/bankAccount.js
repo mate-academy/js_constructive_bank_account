@@ -1,25 +1,23 @@
 'use strict';
 
-function BankAccount(name, initial) {
+function BankAccount(name, money) {
   this.name = name;
-  this.initial = initial;
+  this.money = money;
 
-  const history = [`Initial: ${initial}`];
-
-  this.history = history;
+  this.history = [`Initial: ${money}`];
 };
 
 BankAccount.prototype.getInfo = function() {
-  return `Name: ${this.name}, Amount: ${this.initial}$`;
+  return `Name: ${this.name}, Amount: ${this.money}$`;
 };
 
 BankAccount.prototype.addMoney = function(amount, info) {
-  this.initial = this.initial + amount;
+  this.money = this.money + amount;
   this.history.push(`${info}: ${amount}`);
 };
 
 BankAccount.prototype.withdrawMoney = function(amount, info) {
-  this.initial = this.initial - amount;
+  this.money = this.money - amount;
   this.history.push(`${info}: -${amount}`);
 };
 
