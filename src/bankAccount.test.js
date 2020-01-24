@@ -6,7 +6,7 @@ test('Can be used as a constructor', () => {
   const account = new BankAccount('Dmytro', 1000);
 
   expect(account)
-    .toBeInstanceOf(BankAccount)
+    .toBeInstanceOf(BankAccount);
 });
 
 test('Should have all the methods in prototype', () => {
@@ -38,7 +38,7 @@ test('Should have an initial history', () => {
     .toBeInstanceOf(Array);
 
   expect(history)
-    .toHaveLength(1)
+    .toHaveLength(1);
 
   expect(history[0])
     .toBe('Initial: 1000');
