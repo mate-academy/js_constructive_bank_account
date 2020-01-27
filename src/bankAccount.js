@@ -2,10 +2,9 @@
 
 function BankAccount(name, initialAmount) {
   this.name = name;
-  this.initialAmount = initialAmount;
 
   this.amount = initialAmount;
-  this.transactions = [`Initial: ${this.initialAmount}`];
+  this.transactions = [`Initial: ${initialAmount}`];
 };
 
 BankAccount.prototype = {
