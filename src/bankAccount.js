@@ -1,8 +1,7 @@
 'use strict';
 
-function BankAccount(name, amount, birthday) {
+function BankAccount(name, amount) {
   this.name = name;
-  this.birthday = birthday;
   this.amount = amount;
   this.accountHistory = [`Initial: ${this.amount}`];
 };
