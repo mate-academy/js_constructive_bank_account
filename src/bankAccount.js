@@ -3,7 +3,6 @@
 function BankAccount(name, amount) {
   this.name = name;
   this.initialMoney = amount;
-  this.birthDate = '01.01.1990';
   this.history = [`Initial: ${this.initialMoney}`];
 };
 
@@ -14,14 +13,12 @@ BankAccount.prototype = {
 
   addMoney(amount, reason) {
     this.initialMoney += amount;
-    this.reason = reason;
-    this.history.push(`${this.reason}: ${amount}`);
+    this.history.push(`${reason}: ${amount}`);
   },
 
   withdrawMoney(amount, reason) {
     this.initialMoney -= amount;
-    this.reason = reason;
-    this.history.push(`${this.reason}: -${amount}`);
+    this.history.push(`${reason}: -${amount}`);
   },
 
   getAccountHistory() {
