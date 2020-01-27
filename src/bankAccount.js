@@ -3,8 +3,7 @@
 function BankAccount(name, money) {
   this.name = name;
   this.money = money;
-  this.transactions = [];
-  this.transactions.push(`Initial: ${this.money}`);
+  this.transactions = [`Initial: ${this.money}`];
 }
 
 BankAccount.prototype.getInfo = function() {
