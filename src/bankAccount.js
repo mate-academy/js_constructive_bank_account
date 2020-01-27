@@ -13,15 +13,11 @@ BankAccount.prototype.getInfo = function() {
 BankAccount.prototype.addMoney = function(money, transaction) {
   this.amount += money;
   this.history.push(`${transaction}: ${money}`);
-
-  return `${this.amount}, ${this.transaction}`;
 };
 
 BankAccount.prototype.withdrawMoney = function(money, transaction) {
   this.amount -= money;
   this.history.push(`${transaction}: -${money}`);
-
-  return `${this.amount}, ${this.transaction}`;
 };
 
 BankAccount.prototype.getAccountHistory = function() {
