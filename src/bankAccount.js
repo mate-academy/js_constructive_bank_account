@@ -1,5 +1,11 @@
 'use strict';
 
+function BankAccount(name, amount) {
+  this.name = name;
+  this.amount = amount;
+  this.accountHistory = [`Initial: ${amount}`];
+}
+
 BankAccount.prototype = {
   getInfo: function() {
     return `Name: ${this.name}, Amount: ${this.amount}$`;
@@ -19,11 +25,5 @@ BankAccount.prototype = {
     return this.accountHistory;
   },
 };
-
-function BankAccount(name, amount) {
-  this.name = name;
-  this.amount = amount;
-  this.accountHistory = [`Initial: ${amount}`];
-}
 
 module.exports = BankAccount;
