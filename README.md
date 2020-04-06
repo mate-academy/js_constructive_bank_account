@@ -25,7 +25,7 @@ const pavel = new Person('Pavel', 400);
 dmytro.getInfo(); // print `Name: Dmytro, Amount: 1000$`
 dmytro.addMoney(2000, 'salary');
 dmytro.withdrawMoney(500, 'new phone');
-dmytro.getInfo(); // Name: Dmytro, Amount: 2500$
+dmytro.getInfo(); // Name: Dmytro, Amount: 1500$
 dmytro.withdrawMoney(500, 'apartment rent');
 dmytro.getAccountHistory(); // [ 'Initial: 1000', 'salary: 2000', 'new phone: -500', 'apartment rent: -500']
 
