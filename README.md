@@ -1,5 +1,3 @@
-- [For review GitHub Pages](https://batsenko.github.io/js_constructive_bank_account/)
-
 # Constructive Bank Account
 
 Create a **function/constructor** for working with bank account data of a person.
