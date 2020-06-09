@@ -2,7 +2,7 @@
 
 function BankAccount(name, balance, birthdate) {
   this.name = name;
-  this.dateOfBirth = birthdate;
+  this.birthdate = birthdate;
   this.balance = balance;
   this.accountHistory = [`Initial: ${this.balance}`];
 };
@@ -13,13 +13,13 @@ BankAccount.prototype = {
   },
 
   addMoney: function(amount, transactionName) {
+    this.balance += amount;
     this.accountHistory.push(`${transactionName}: ${amount}`);
-    this.balance = this.balance + amount;
   },
 
   withdrawMoney: function(amount, transactionName) {
+    this.balance -= amount;
     this.accountHistory.push(`${transactionName}: ${-amount}`);
-    this.balance = this.balance - amount;
   },
 
   getAccountHistory: function() {
