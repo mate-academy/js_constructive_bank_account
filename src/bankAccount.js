@@ -2,21 +2,23 @@
 
 BankAccount.prototype = {
   get amount() {
-    return Object.values(this.history)
-      .reduce((sum, current) => sum + current);
+    const values = Object.values(this.history);
+
+    return values.reduce((sum, current) => sum + current);
   },
   getInfo() {
     return `Name: ${this.name}, Amount: ${this.amount}$`;
   },
-  addMoney(value, valueName) {
-    this.history[valueName] = value;
+  addMoney(value, operation) {
+    this.history[operation] = value;
   },
-  withdrawMoney(value, valueName) {
-    this.history[valueName] = -value;
+  withdrawMoney(value, operation) {
+    this.history[operation] = -value;
   },
   getAccountHistory() {
-    return Object.entries(this.history)
-      .map(entry => entry.join(': '));
+    const entries = Object.entries(this.history);
+
+    return entries.map(entry => entry.join(': '));
   },
 };
 
