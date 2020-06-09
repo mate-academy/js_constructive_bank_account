@@ -15,16 +15,16 @@ BankAccount.prototype = {
     return this.moneyHistory;
   },
 
-  addMoney(sum, reason) {
+  addMoney(sum, operation) {
     this.amount += sum;
 
-    return this.moneyHistory.push(`${reason}: ${sum}`);
+    return this.moneyHistory.push(`${operation}: ${sum}`);
   },
 
-  withdrawMoney(sum, reason) {
+  withdrawMoney(sum, operation) {
     this.amount -= sum;
 
-    return this.moneyHistory.push(`${reason}: -${sum}`);
+    return this.moneyHistory.push(`${operation}: -${sum}`);
   },
 };
 
