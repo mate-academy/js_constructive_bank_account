@@ -11,14 +11,14 @@ BankAccount.prototype = {
     return `Name: ${this.name}, Amount: ${this.amount}$`;
   },
 
-  addMoney: function(amountAdded, transactionPurpose) {
-    this.amount += amountAdded;
-    this.accountHistory.push(`${transactionPurpose}: ${amountAdded}`);
+  addMoney: function(amount, purpose) {
+    this.amount += amount;
+    this.accountHistory.push(`${purpose}: ${amount}`);
   },
 
-  withdrawMoney: function(amountWithdrawn, transactionPurpose) {
-    this.amount -= amountWithdrawn;
-    this.accountHistory.push(`${transactionPurpose}: -${amountWithdrawn}`);
+  withdrawMoney: function(amount, purpose) {
+    this.amount -= amount;
+    this.accountHistory.push(`${purpose}: -${amount}`);
   },
 
   getAccountHistory: function() {
