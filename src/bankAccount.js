@@ -20,9 +20,9 @@ BankAccount.prototype = {
   },
 };
 
-function BankAccount(name, amount) {
+function BankAccount(name, amount, birthDate) {
   this.name = name;
-  this.birthDate = 'birthDate';
+  this.birthDate = birthDate;
   this.amount = amount;
   this.transactions = [`Initial: ${amount}`];
 }
