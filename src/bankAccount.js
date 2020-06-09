@@ -13,13 +13,11 @@ BankAccount.prototype = {
   },
 
   addMoney: function(money, info) {
-    this[info] = money;
     this.history.push(`${info}: ${money}`);
     this.amount += money;
   },
 
   withdrawMoney: function(money, info) {
-    this[info] = money;
     this.amount -= money;
     this.history.push(`${info}: -${money}`);
   },
