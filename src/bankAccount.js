@@ -1,8 +1,12 @@
 'use strict';
 
 BankAccount.prototype = {
+  get amount() {
+    return Object.values(this.history)
+      .reduce((sum, current) => sum + current);
+  },
   getInfo() {
-    return `Name: ${this.name}, Amount: ${this.getAmount()}$`;
+    return `Name: ${this.name}, Amount: ${this.amount}$`;
   },
   addMoney(value, valueName) {
     this.history[valueName] = value;
@@ -21,11 +25,6 @@ function BankAccount(name, initial) {
 
   this.history = {
     'Initial': initial,
-  };
-
-  this.getAmount = function() {
-    return Object.values(this.history)
-      .reduce((sum, current) => sum + current);
   };
 };
 
