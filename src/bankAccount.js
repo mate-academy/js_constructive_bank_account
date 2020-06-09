@@ -5,14 +5,14 @@ BankAccount.prototype = {
     return (`Name: ${this.name}, Amount: ${this.amount}$`);
   },
 
-  addMoney(transaction, info) {
-    this.amount += transaction;
-    this.transactions.push(`${info}: ${transaction}`);
+  addMoney(description, info) {
+    this.amount += description;
+    this.transactions.push(`${info}: ${description}`);
   },
 
-  withdrawMoney(transaction, info) {
-    this.amount -= transaction;
-    this.transactions.push(`${info}: -${transaction}`);
+  withdrawMoney(description, info) {
+    this.amount -= description;
+    this.transactions.push(`${info}: -${description}`);
   },
 
   getAccountHistory() {
