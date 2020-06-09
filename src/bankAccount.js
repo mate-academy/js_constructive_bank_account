@@ -1,21 +1,21 @@
 'use strict';
 
 BankAccount.prototype = {
-  getInfo: function() {
+  getInfo() {
     return (`Name: ${this.name}, Amount: ${this.amount}$`);
   },
 
-  addMoney: function(addedMoney, info) {
+  addMoney(addedMoney, info) {
     this.amount += addedMoney;
     this.transactions.push(`${info}: ${addedMoney}`);
   },
 
-  withdrawMoney: function(wasSpending, info) {
+  withdrawMoney(wasSpending, info) {
     this.transactions.push(`${info}: -${wasSpending}`);
     this.amount -= wasSpending;
   },
 
-  getAccountHistory: function() {
+  getAccountHistory() {
     return this.transactions;
   },
 };
