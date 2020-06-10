@@ -7,21 +7,21 @@ function BankAccount(name, income) {
 }
 
 BankAccount.prototype = {
-  getInfo: function() {
+  getInfo() {
     return `Name: ${this.name}, Amount: ${this.income}$`;
   },
 
-  addMoney: function(amount, operation) {
+  addMoney(amount, operation) {
     this.income += amount;
     this.history.push(`${operation}: ${amount}`);
   },
 
-  withdrawMoney: function(amount, operation) {
+  withdrawMoney(amount, operation) {
     this.income -= amount;
     this.history.push(`${operation}: ${-amount}`);
   },
 
-  getAccountHistory: function() {
+  getAccountHistory() {
     return this.history;
   },
 
