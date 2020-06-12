@@ -18,7 +18,7 @@ BankAccount.prototype = {
 
   withdrawMoney(money, key) {
     this.amount -= money;
-    this.history.push(key + ': ' + money);
+    this.history.push(key + ': -' + money);
   },
 
   getAccountHistory() {
