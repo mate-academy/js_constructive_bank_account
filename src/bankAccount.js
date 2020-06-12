@@ -1,30 +1,27 @@
 'use strict';
 
-function BankAccount(name, sum, birthDate) {
-  const regexp = /^([0-2]\d|3[0,1])\.(0\d|1[0-2])\.(\d{2})$/;
-
+function BankAccount(name, amount, birthDate) {
   this.name = name;
-  this.money = sum;
-
-  this.date = birthDate && birthDate.match(regexp)
-    ? birthDate.match(regexp)[0]
-    : undefined;
-  this.history = [`Initial: ${sum}`];
+  this.money = amount;
+  this.birthDate = birthDate;
+  this.history = [`Initial: ${amount}`];
 };
 
 BankAccount.prototype.getInfo = function() {
-  return `Name: ${this.name}, Amount: ${this.money}$`
-  + (this.date ? `, Date of birthday: ${this.date}` : '');
+  const validatedBirthDate = this.birthDate
+    ? `, Date of birthday: ${this.date}` : '';
+
+  return `Name: ${this.name}, Amount: ${this.money}$` + validatedBirthDate;
 };
 
-BankAccount.prototype.addMoney = function(sum, description) {
-  this.money += sum;
-  this.history.push(`${description}: ${sum}`);
+BankAccount.prototype.addMoney = function(amount, description) {
+  this.money += amount;
+  this.history.push(`${description}: ${amount}`);
 };
 
-BankAccount.prototype.withdrawMoney = function(sum, description) {
-  this.money -= sum;
-  this.history.push(`${description}: -${sum}`);
+BankAccount.prototype.withdrawMoney = function(amount, description) {
+  this.money -= amount;
+  this.history.push(`${description}: -${amount}`);
 };
 
 BankAccount.prototype.getAccountHistory = function() {
