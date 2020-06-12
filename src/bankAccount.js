@@ -10,13 +10,13 @@ BankAccount.prototype = {
   getInfo() {
     return `Name: ${this.name}, Amount: ${this.amount}$`;
   },
-  addMoney(money, fromWhat) {
+  addMoney(money, source) {
     this.amount += money;
-    this.history.push(`${fromWhat}: ${money}`);
+    this.history.push(`${source}: ${money}`);
   },
-  withdrawMoney(money, forWhat) {
+  withdrawMoney(money, purpose) {
     this.amount -= money;
-    this.history.push(`${forWhat}: -${money}`);
+    this.history.push(`${purpose}: -${money}`);
   },
   getAccountHistory() {
     return this.history;
