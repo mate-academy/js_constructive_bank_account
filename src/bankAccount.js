@@ -1,10 +1,10 @@
 'use strict';
 
-function BankAccount(name, initialValue, dateOfBirth) {
+function BankAccount(name, initialAmount, dateOfBirth) {
   this.name = name;
   this.birth = `${dateOfBirth}`;
-  this.amount = initialValue;
-  this.history = [`Initial: ${initialValue}`];
+  this.amount = initialAmount;
+  this.history = [`Initial: ${initialAmount}`];
 };
 
 BankAccount.prototype = {
