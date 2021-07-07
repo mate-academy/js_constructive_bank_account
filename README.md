@@ -1,5 +1,13 @@
 # Constructive Bank Account
 
+**Read the guideline before start**
+
+1. Replace `<your_account>` with your Github username in the links
+    - [PULL REQUEST](https://github.com/mate-academy/js_constructive_bank_account/pull/116)
+
+2. [Guideline](https://github.com/mate-academy/js_task-guideline/blob/master/README.md)
+___
+
 Create a **function/constructor** for working with bank account data of a person.
 
 **Requirements:**
