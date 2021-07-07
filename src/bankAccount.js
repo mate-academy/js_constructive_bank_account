@@ -1,7 +1,27 @@
 'use strict';
 
-function BankAccount() {
-  // Write your code here
+function BankAccount(name, amount) {
+  this.name = name;
+  this.amount = amount;
+  this.accountHistory = [`Initial: ${this.amount}`];
+};
+
+BankAccount.prototype.getInfo = function() {
+  return `Name: ${this.name}, Amount: ${this.amount}$`;
+};
+
+BankAccount.prototype.addMoney = function(sum, transaction) {
+  this.amount += sum;
+  this.accountHistory.push(`${transaction}: ${sum}`);
+};
+
+BankAccount.prototype.withdrawMoney = function(sum, transaction) {
+  this.amount -= sum;
+  this.accountHistory.push(`${transaction}: -${sum}`);
+};
+
+BankAccount.prototype.getAccountHistory = function() {
+  return this.accountHistory;
 };
 
 module.exports = BankAccount;
